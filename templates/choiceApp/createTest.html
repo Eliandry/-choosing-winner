@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+{%block title%}{{movie.name}}{%endblock%}
+{% block content %}
+{%load static%}
+    <div>
+    <div class="text-center">
+          <h1 class="h3 mb-3 font-weight-normal">Создание статьи</h1>
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="text-center" >
+            <div class="form-label-group mb-3">
+                <label>Название теста:</label>
+                <h3><input type="text" maxlength="45" size="40" name="name" id="name"></h3>
+            </div>
+            <div class="form-label-group mb-3">
+                <label>Изображение для статьи :</label>
+                {{form}}
+            </div>
+            <div class="checkbox mb-3">
+              <label>
+                    <input type="checkbox" value="remember-me">Подтвердить
+              </label>
+            </div>
+            <button class="btn btn-secondary btn-lg btn-block" type="submit">Далее>></button>
+        </div>
+    </form>
+    </div>
+{% endblock %}

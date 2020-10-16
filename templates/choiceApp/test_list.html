@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{%block title%}Главная{%endblock%}
+{% block content %}
+{%load static%}
+    <h3>Все тесты</h3>
+    {% for test in test_list %}
+        <h5>{{test.name}}</h5>
+        <p>{{test.author}}</p>
+    {%endfor%}
+
+    <a href="{%url 'createTest'%}">Создать</a>
+{%endblock%}
