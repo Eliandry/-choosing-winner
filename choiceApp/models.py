@@ -7,7 +7,7 @@ class Photo(models.Model):
 class Test(models.Model):
     name=models.CharField(max_length=35)
     author=models.CharField(max_length=40)
-    photo=models.ManyToManyField(Photo)
+    photo=models.ManyToManyField(Photo, related_name='photos')
     avatar=models.ImageField(blank=True,upload_to='images/avatar/')
     def __str__(self):
         return self.name
