@@ -2,6 +2,6 @@ from django.urls import path
 from .views import *
 urlpatterns = [
     path('',TestList.as_view()),
-    path('createTest/',createTest,name='createTest'),
-    path('createTest/<int:pk>',addPhoto,name='addPhoto')
+    path('createTest/',CreateTest.as_view(),name='createTest'),
+    path('createTest/<int:pk>',AddPhoto.as_view(),name='addPhoto')
 ]

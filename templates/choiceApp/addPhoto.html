@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    hello
-</body>
-</html>
+{% extends 'index.html' %}
+{%block title%}Добавить фото{%endblock%}
+{% block content %}
+{%load static%}
+    <div>
+    <div class="text-center">
+          <h1 class="h3 mb-3 font-weight-normal">Добавить картинки</h1>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="form-label-group mb-3">
+                {{form}}
+            </div>
+        <p>Минимум 11</p>
+        <p>Загружено : {{count}}</p>
+        <button type="submit" class="btn btn-outline-info">Загрузить</button>
+    </form>
+    {%if bool_count%}
+        <a class="btn btn-outline-success" href="/">Подтвердить</a>
+    {%endif%}
+    </div>
+{%endblock%}

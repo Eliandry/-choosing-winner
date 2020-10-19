@@ -11,30 +11,36 @@ class TestList(ListView):
     model = Test
 
 
-def createTest(request):
-    form = AddAvatar()
-    if request.method == "POST":
+class CreateTest(View):
+    def get(self, request):
+        form = AddAvatar()
+        return render(request, 'choiceApp/createTest.html', {'form': form, 'user': auth.get_user(request)})
+
+    def post(self, request):
         form = AddAvatar(request.POST, request.FILES)
-        if form.is_valid():
-            model_test = form.save(commit=False)
-            model_test.name = request.POST.get('name')
-            model_test.author = auth.get_user(request).username
-            model_test.save()
-            model = Test.objects.get(name=request.POST.get('name'))
-            return redirect(f'/createTest/{model_test.id}')
-    return render(request, 'choiceApp/createTest.html', {'form': form, 'user': auth.get_user(request)})
+        model_test = form.save(commit=False)
+        model_test.name = request.POST.get('name')
+        model_test.author = auth.get_user(request).username
+        model_test.save()
+        return redirect(f'/createTest/{model_test.id}')
 
 
-def addPhoto(request, pk):
-    form = AddPhoto()
+class AddPhoto(View):
+    def get(self, request, pk):
+        form = AddPhotoForm()
+        test = Test.objects.get(id=pk)
+        if test.photo.count() > 11:
+            bool_count=True
+        else:
+            bool_count=False
+        return render(request, 'choiceApp/addPhoto.html', {'form': form, 'user': auth.get_user(request),'count':test.photo.count(),'bool_count':bool_count})
 
+    def post(self, request, pk):
+        test = Test.objects.get(id=pk)
+        for f in request.FILES.getlist('photo'):
+            photo = Photo(photo=f)
+            photo.save()
+            test.photo.add(photo)
+            test.save()
+        return redirect(f'/createTest/{test.id}')
 
-    if request.method == "POST":
-        form = AddPhoto(request.POST, request.FILES)
-        if form.is_valid():
-            test=Test.objects.get(id=pk)
-            test.photo.add(form)
-            if test.photo.count()<11:
-                return HttpResponseRedirect(f'createTest/{pk}',{'error':'Недостаточно картинок'})
-            return HttpResponseRedirect('/')
-    return render(request, 'choiceApp/addPhoto.html', {'form': form, 'user': auth.get_user(request)})
