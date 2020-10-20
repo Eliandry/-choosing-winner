@@ -2,11 +2,21 @@
 {%block title%}Главная{%endblock%}
 {% block content %}
 {%load static%}
-    <h3>Все тесты</h3>
+<h3>Все тесты</h3>
+<div class="row">
     {% for test in test_list %}
-        <h5>{{test.name}}</h5>
-        <p>{{test.author}}</p>
+    <div class="border col-3">
+        <div class="wrap">
+            <h3 style="background:white;">{{test.name}}</h3>
+            {%if test.avatar%}
+            <p><img src="{{test.avatar.url}}" class="round" width="170"></p>
+            {%else%}
+            <p><img src="https://craftdepot.ru/media/original_images/test23x.png" class="round" width="170"></p>
+            {%endif%}
+            <p>Автор: {{test.author}}</p>
+            <p><a href="createSession/{{test.id}}/" class="btn btn-outline-warning">Начать</a></p>
+        </div>
+    </div>
     {%endfor%}
-
-    <a href="{%url 'createTest'%}">Создать</a>
+</div>
 {%endblock%}

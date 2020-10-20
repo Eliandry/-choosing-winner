@@ -5,6 +5,7 @@ from .forms import *
 from django.views.generic import ListView
 from .models import *
 from django.contrib import auth
+from .choice import ChoiceSession
 
 
 class TestList(ListView):
@@ -30,10 +31,12 @@ class AddPhoto(View):
         form = AddPhotoForm()
         test = Test.objects.get(id=pk)
         if test.photo.count() > 11:
-            bool_count=True
+            bool_count = True
         else:
-            bool_count=False
-        return render(request, 'choiceApp/addPhoto.html', {'form': form, 'user': auth.get_user(request),'count':test.photo.count(),'bool_count':bool_count})
+            bool_count = False
+        return render(request, 'choiceApp/addPhoto.html',
+                      {'form': form, 'user': auth.get_user(request), 'count': test.photo.count(),
+                       'bool_count': bool_count})
 
     def post(self, request, pk):
         test = Test.objects.get(id=pk)
@@ -44,3 +47,28 @@ class AddPhoto(View):
             test.save()
         return redirect(f'/createTest/{test.id}')
 
+
+def addSession(request, pk):
+    ch = ChoiceSession(request)
+    ch.add(pk)
+    return redirect('/start/test/')
+
+
+def deletePhoto(request, pk):
+    ch = ChoiceSession(request)
+    ch.remove(pk)
+    if ch.winner():
+        win_id = ch.winner()
+        ch.clear()
+        win=Photo.objects.get(id=int(win_id))
+        return render(request, 'choiceApp/winner.html', {'win': win})
+    return redirect('/start/test/')
+
+
+class ChoicePhoto(View):
+    def get(self, request):
+        ch = ChoiceSession(request)
+        lists = ch.get_2_img()
+        img1=Photo.objects.get(id=lists[0])
+        img2 = Photo.objects.get(id=lists[1])
+        return render(request, 'choiceApp/choice.html', {'img1':img1 , 'img2':img2})

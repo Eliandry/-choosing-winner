@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+{%block title%}Тест{%endblock%}
+{% block content %}
+{%load static%}
+<div class="text-center p-4">
+    <h2>Выбор лучшего фото</h2>
+</div>
+<div class="text-center p-2" style="outline: 0.1px solid #000; background:7d7d7d;">
+    <a href="/delete/{{img2.id}}/" class="mr-5">
+        <img src="{{img1.photo.url}}" width="600">
+    </a>
+    <a href="/delete/{{img1.id}}/" class="ml-5">
+        <img src="{{img2.photo.url}}" width="600">
+    </a>
+</div>
+
+
+{%endblock%}

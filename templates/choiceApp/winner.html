@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+{%block title%}Победитель{%endblock%}
+{% block content %}
+{%load static%}
+<div class="text-center p-4">
+    <h2>Лучшее фото</h2>
+</div>
+<div class="text-center p-4">
+    <img src="{{win.photo.url}}" width="700">
+</div>
+<a class="btn btn-primary btn-lg" href="/">Домой >></a>
+{%endblock%}

@@ -1,0 +1,48 @@
+.wrap {
+  width: 260px;
+  height: 270px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  position: relative;
+}
+.wrap:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 200px solid #CCF9F6;
+  border-top: 50px solid #FFCE86;
+  border-right: 200px solid #FF9B6C;
+  border-bottom: 220px solid #CCF9F6;
+  z-index: -1;
+  left: -70px;
+  top: 0;
+}
+.wrap p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.wrap a {
+  text-decoration: none;
+  color: #FF9B6C;
+  font-weight: bold;
+}
+       .first:first-letter {
+        color: red;
+        font-size: 27pt;
+        font-family: algerian;
+       }
+       .category {
+            font-size: 13pt;
+            color:black;
+       }
+
+   .round {
+    border-radius: 100px; /* Радиус скругления */
+    border: 3px solid orange; /* Параметры рамки */
+    box-shadow: 0 0 7px #666; /* Параметры тени */
+   }

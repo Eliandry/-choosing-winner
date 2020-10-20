@@ -25,7 +25,7 @@ SECRET_KEY = 'nni*+9)54hho-*5d6)aq7vq^z!wx57*)8ii7na8!ui-kcgqhm$'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-CHOICE_SESSION_ID = 'choice'
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -124,3 +124,4 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
+CHOICE_SESSION_ID = 'choice'
